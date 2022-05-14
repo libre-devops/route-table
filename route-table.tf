@@ -15,8 +15,8 @@ resource "azurerm_route_table" "rt" {
   tags                          = var.tags
 }
 
-resource "azurerm_route" "force_internet_tunneling" {
-  name                = "InternetForceTunneling"
+resource "azurerm_route" "force_tunneling" {
+  name                = try(var.force_tunnel_route_name, "InternetForceTunneling", null)
   resource_group_name = var.rg_name
   route_table_name    = azurerm_route_table.rt.name
   address_prefix      = "0.0.0.0/0"

@@ -21,6 +21,12 @@ variable "force_tunnel_next_hope_type" {
   default     = "VirtualNetworkGateway"
 }
 
+variable "force_tunnel_route_name" {
+  type        = string
+  description = "The name of the force tunnel route name if used"
+  default     = null
+}
+
 variable "location" {
   description = "The location for this resource to be put in"
   type        = string

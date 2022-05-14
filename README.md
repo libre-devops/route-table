@@ -36,11 +36,12 @@ module "rt" {
   location = module.rg.rg_location
   tags     = module.rg.rg_tags
 
-  route_table_name              = "rt-${var.short}-${var.loc}-${terraform.workspace}-build"
+  route_table_name              = "rt-${var.short}-${var.loc}-${terraform.workspace}-01"
   enable_force_tunneling        = true
+  force_tunnel_route_name       = "udr-${var.short}-${var.loc}-${terraform.workspace}-ForceInternetTunnel"
   disable_bgp_route_propagation = true
 
-  associate_with_subnet = true
+  associate_with_subnet  = true
   subnet_id_to_associate = element(values(module.network.subnets_ids), 0)
 }
 
@@ -64,7 +65,7 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [azurerm_route.force_internet_tunneling](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/route) | resource |
+| [azurerm_route.force_tunneling](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/route) | resource |
 | [azurerm_route_table.rt](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/route_table) | resource |
 | [azurerm_subnet_route_table_association.rt_snet_association](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/subnet_route_table_association) | resource |
 
@@ -76,6 +77,7 @@ No modules.
 | <a name="input_disable_bgp_route_propagation"></a> [disable\_bgp\_route\_propagation](#input\_disable\_bgp\_route\_propagation) | Whether or not to enable or disable BGP routes | `bool` | n/a | yes |
 | <a name="input_enable_force_tunneling"></a> [enable\_force\_tunneling](#input\_enable\_force\_tunneling) | Whether or not force tunneling is enabled, defaults to true | `bool` | `true` | no |
 | <a name="input_force_tunnel_next_hope_type"></a> [force\_tunnel\_next\_hope\_type](#input\_force\_tunnel\_next\_hope\_type) | The next hop type if a forced tunnel is created, defaults to VirtualNetworkGateway | `string` | `"VirtualNetworkGateway"` | no |
+| <a name="input_force_tunnel_route_name"></a> [force\_tunnel\_route\_name](#input\_force\_tunnel\_route\_name) | The name of the force tunnel route name if used | `string` | `null` | no |
 | <a name="input_location"></a> [location](#input\_location) | The location for this resource to be put in | `string` | n/a | yes |
 | <a name="input_rg_name"></a> [rg\_name](#input\_rg\_name) | The name of the resource group, this module does not create a resource group, it is expecting the value of a resource group already exists | `string` | n/a | yes |
 | <a name="input_route_table_name"></a> [route\_table\_name](#input\_route\_table\_name) | The name of the route table | `string` | n/a | yes |
