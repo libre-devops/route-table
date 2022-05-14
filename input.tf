@@ -12,6 +12,7 @@ variable "enable_force_tunneling" {
 variable "force_tunnel_next_hope_type" {
   type        = string
   description = "The next hop type if a forced tunnel is created, defaults to VirtualNetworkGateway"
+  default     = "VirtualNetworkGateway"
 }
 
 variable "location" {
@@ -36,6 +37,7 @@ variable "route_table_name" {
 variable "routes" {
   type        = any
   description = "The map block for the routes"
+  default     = null
 }
 
 variable "tags" {
