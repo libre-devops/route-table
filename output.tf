@@ -1,32 +1,24 @@
-output "sa_id" {
-  value       = azurerm_storage_account.sa.id
-  description = "The ID of the storage account"
+output "force_tunnel_route_id" {
+  description = "If force tunneling is enabled, the id of the route"
+  value       = var.enable_force_tunneling == true ? azurerm_route.force_internet_tunneling.id : null
 }
 
-output "sa_name" {
-  value       = azurerm_storage_account.sa.name
-  description = "The name of the storage account"
+output "force_tunnel_route_name" {
+  description = "If force tunneling is enabled, the name of the route"
+  value       = var.enable_force_tunneling == true ? azurerm_route.force_internet_tunneling.name : null
 }
 
-output "sa_primary_access_key" {
-  value       = azurerm_storage_account.sa.primary_access_key
-  description = "The primary access key of the storage account"
-  sensitive   = true
+output "rt_id" {
+  description = "The id of the route table"
+  value       = azurerm_route_table.rt.id
 }
 
-output "sa_primary_blob_endpoint" {
-  value       = azurerm_storage_account.sa.primary_blob_endpoint
-  description = "The primary blob endpoint of the storage account"
+output "rt_name" {
+  description = "The name of the route table"
+  value       = azurerm_route_table.rt.name
 }
 
-output "sa_primary_connection_string" {
-  value       = azurerm_storage_account.sa.primary_blob_connection_string
-  description = "The primary blob connection string of the storage account"
-  sensitive   = true
-}
-
-output "sa_secondary_access_key" {
-  value       = azurerm_storage_account.sa.secondary_access_key
-  description = "The secondary access key of the storage account"
-  sensitive   = true
+output "rt_subnets" {
+  description = "The subnets the route table is attitude to"
+  value       = azurerm_route_table.rt.subnets
 }

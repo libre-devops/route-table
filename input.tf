@@ -1,13 +1,17 @@
-variable "identity_ids" {
-  description = "Specifies a list of user managed identity ids to be assigned to the VM."
-  type        = list(string)
-  default     = []
+variable "disable_bgp_route_propagation" {
+  type        = bool
+  description = "Whether or not to enable or disable BGP routes"
 }
 
-variable "identity_type" {
-  description = "The Managed Service Identity Type of this Virtual Machine."
+variable "enable_force_tunneling" {
+  type        = bool
+  description = "Whether or not force tunneling is enabled, defaults to true"
+  default     = true
+}
+
+variable "force_tunnel_next_hope_type" {
   type        = string
-  default     = ""
+  description = "The next hop type if a forced tunnel is created, defaults to VirtualNetworkGateway"
 }
 
 variable "location" {
@@ -22,6 +26,16 @@ variable "rg_name" {
     condition     = length(var.rg_name) > 1 && length(var.rg_name) <= 24
     error_message = "Resource group name is not valid."
   }
+}
+
+variable "route_table_name" {
+  type        = string
+  description = "The name of the route table"
+}
+
+variable "routes" {
+  type        = any
+  description = "The map block for the routes"
 }
 
 variable "tags" {
