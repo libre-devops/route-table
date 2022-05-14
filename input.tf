@@ -1,3 +1,9 @@
+variable "associate_with_subnet" {
+  type        = bool
+  description = "If this route table should be assosciated with a subnet, defaults to true"
+  default     = true
+}
+
 variable "disable_bgp_route_propagation" {
   type        = bool
   description = "Whether or not to enable or disable BGP routes"
@@ -37,6 +43,12 @@ variable "route_table_name" {
 variable "routes" {
   type        = any
   description = "The map block for the routes"
+  default     = null
+}
+
+variable "subnet_id_to_associate" {
+  type        = string
+  description = "If you wish to associate with a subnet, the ID of it"
   default     = null
 }
 

@@ -24,3 +24,9 @@ resource "azurerm_route" "force_internet_tunneling" {
 
   count = var.enable_force_tunneling ? 1 : 0
 }
+
+resource "azurerm_subnet_route_table_association" "rt_snet_association" {
+  subnet_id      = var.subnet_id_to_associate
+  route_table_id = azurerm_route_table.rt.id
+  count          = var.associate_with_subnet ? 1 : 0
+}
